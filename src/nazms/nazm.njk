@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+permalink: nazms/{{ slug }}/
+---
+
+<article class="nazm">
+  <header class="poetry-header">
+    <h1>{{ title }}</h1>
+    {% if meter %}
+    <p class="meter">بحر: {{ meter }}</p>
+    {% endif %}
+  </header>
+
+  <div class="verses">
+  {% for verse in verses %}
+    <p class="verse">{{ verse }}</p>
+  {% endfor %}
+  </div>
+
+  <footer class="poetry-footer">
+    <a href="/nazms/" class="back-link">← نظیمیں</a>
+  </footer>
+</article>

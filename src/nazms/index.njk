@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+title: نظیمیں - Nazms
+---
+
+<div class="poetry-index">
+  <header class="page-header">
+    <h1>نظمیں</h1>
+    <p class="count">{{ collections.nazms | length }} نظیمیں</p>
+  </header>
+
+  <ul class="poetry-list">
+  {% for nazm in collections.nazms %}
+    <li class="poetry-item">
+      <a href="/nazms/{{ nazm.data.slug }}/">
+        <span class="title">{{ nazm.data.title }}</span>
+      </a>
+      {% if nazm.data.meter %}
+      <span class="meter">{{ nazm.data.meter }}</span>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
+  {% if collections.nazms.length == 0 %}
+  <p class="empty-message">نظمیں جلد آئیں گی۔</p>
+  {% endif %}
+</div>

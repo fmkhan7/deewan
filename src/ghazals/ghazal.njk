@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+eleventyExcludeFromCollections: true
+pagination:
+  data: collections.ghazals
+  size: 1
+  alias: ghazal
+permalink: ghazals/{{ ghazal.data.slug }}/
+---
+
+<article class="ghazal">
+  <header class="poetry-header">
+    <h1>{{ ghazal.data.title }}</h1>
+    {% if ghazal.data.meter %}
+    <p class="meter">بحر: {{ ghazal.data.meter }}</p>
+    {% endif %}
+  </header>
+
+  <div class="couplets">
+  {% for couplet in ghazal.data.couplets %}
+    <div class="couplet">
+      <p class="line">{{ couplet.line1 }}</p>
+      <p class="line">{{ couplet.line2 }}</p>
+      {% if couplet.translation %}
+      <p class="translation">{{ couplet.translation }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+
+  <footer class="poetry-footer">
+    <a href="/ghazals/" class="back-link">← غزلیں</a>
+  </footer>
+</article>

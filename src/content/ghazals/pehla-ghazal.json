@@ -1,0 +1,27 @@
+{
+  "title": "پہلی غزل",
+  "slug": "pehla-ghazal",
+  "meter": "ہزجِ مثمن محذوف",
+  "couplets": [
+    {
+      "line1": "دل پہ جا کے تمہاری یاد آئی",
+      "line2": "ہنسیں گے ہم بھی کیا کیا نہ کہائی",
+      "translation": "Your memory came to my heart, we laughed at what we said"
+    },
+    {
+      "line1": "تم ہو تو جہاں کی زینت ہو",
+      "line2": "یہ جہاں تمہاری محنت ہو",
+      "translation": "If you are here, you are the ornament of the world, this world is your effort"
+    },
+    {
+      "line1": "ہر اک دم تجھے 调用 کرتا ہے",
+      "line2": "دل کا یہ حال بے قرار ہے",
+      "translation": "Every moment my heart calls for you, this state of the heart is restless"
+    },
+    {
+      "line1": "ایکتا کی غزل میں ترے",
+      "line2": "یہ نواں رنگ ہے بے مثال ہے",
+      "translation": "In Ekta's ghazal, this is a new color, unmatched"
+    }
+  ]
+}

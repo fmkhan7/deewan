@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+title: غزلیں - Ghazals
+---
+
+<div class="poetry-index">
+  <header class="page-header">
+    <h1>غزلیں</h1>
+    <p class="count">{{ collections.ghazals | length }} غزلیں</p>
+  </header>
+
+  <ul class="poetry-list">
+  {% for ghazal in collections.ghazals %}
+    <li class="poetry-item">
+      <a href="/ghazals/{{ ghazal.data.slug }}/">
+        <span class="title">{{ ghazal.data.title }}</span>
+      </a>
+      {% if ghazal.data.meter %}
+      <span class="meter">{{ ghazal.data.meter }}</span>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
+  {% if collections.ghazals.length == 0 %}
+  <p class="empty-message">غزلیں جلد آئیں گی۔</p>
+  {% endif %}
+</div>

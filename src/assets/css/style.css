@@ -1,0 +1,375 @@
+/* 
+ * Deewan-e-Ekta Stylesheet
+ * Urdu Poetry Collection Website
+ */
+
+/* CSS Variables */
+:root {
+  --color-bg: #fafafa;
+  --color-text: #333;
+  --color-text-urdu: #222;
+  --color-primary: #8b4513;
+  --color-secondary: #a0522d;
+  --color-accent: #d2691e;
+  --color-border: #e0e0e0;
+  --color-card-bg: #fff;
+  
+  --font-urdu: 'Jameel Nori Nastaliq', 'Noto Nastaliq Urdu', serif;
+  --font-body: system-ui, -apple-system, sans-serif;
+  
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  
+  --container-width: 800px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.urdu-text {
+  font-family: var(--font-urdu);
+  font-size: 1.25rem;
+  color: var(--color-text-urdu);
+}
+
+/* Container */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Header */
+.site-header {
+  background: var(--color-card-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-md) 0;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.site-title {
+  font-size: 1.5rem;
+}
+
+.site-title a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.site-nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-nav a:hover {
+  color: var(--color-primary);
+}
+
+/* Main Content */
+.site-main {
+  min-height: 60vh;
+  padding: var(--spacing-xl) 0;
+}
+
+/* Home Page */
+.home-page {
+  text-align: center;
+}
+
+.hero {
+  margin-bottom: var(--spacing-xl);
+}
+
+.hero h2 {
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.tagline {
+  font-size: 1.25rem;
+  color: #666;
+}
+
+.collections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.collection-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--spacing-lg);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.collection-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.collection-card h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.collection-card h3 a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.collection-card p {
+  color: #666;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--color-card-bg);
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .site-header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .site-nav {
+    gap: var(--spacing-md);
+  }
+  
+  .hero h2 {
+    font-size: 1.5rem;
+  }
+  
+  .collections {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Poetry Index Pages */
+.poetry-index {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-header .count {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.poetry-list {
+  list-style: none;
+}
+
+.poetry-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.poetry-item:hover {
+  transform: translateX(-4px);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.poetry-item .title {
+  font-family: var(--font-urdu);
+  font-size: 1.25rem;
+  color: var(--color-text-urdu);
+}
+
+.poetry-item a {
+  text-decoration: none;
+  flex: 1;
+}
+
+.poetry-item .meter {
+  font-size: 0.875rem;
+  color: #888;
+  white-space: nowrap;
+  margin-right: var(--spacing-md);
+}
+
+.empty-message {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: var(--spacing-xl);
+}
+
+/* Poetry Detail Pages */
+.ghazal, .nazm {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.poetry-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.poetry-header h1 {
+  font-family: var(--font-urdu);
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.poetry-header .meter {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Couplets */
+.couplets {
+  margin-bottom: var(--spacing-xl);
+}
+
+.couplet {
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.couplet .line {
+  font-family: var(--font-urdu);
+  font-size: 1.5rem;
+  line-height: 2.2;
+  color: var(--color-text-urdu);
+  margin: 0;
+}
+
+.couplet .translation {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+  margin-top: var(--spacing-sm);
+}
+
+/* Verses */
+.verses {
+  margin-bottom: var(--spacing-xl);
+}
+
+.verse {
+  font-family: var(--font-urdu);
+  font-size: 1.5rem;
+  line-height: 2.2;
+  color: var(--color-text-urdu);
+  text-align: center;
+  padding: var(--spacing-md) 0;
+}
+
+/* Poetry Footer */
+.poetry-footer {
+  text-align: center;
+  padding-top: var(--spacing-lg);
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--color-accent);
+}
+
+/* Responsive adjustments for poetry */
+@media (max-width: 600px) {
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .poetry-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .poetry-item .meter {
+    margin-right: 0;
+  }
+  
+  .couplet .line,
+  .verse {
+    font-size: 1.25rem;
+  }
+}
