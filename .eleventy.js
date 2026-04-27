@@ -8,24 +8,35 @@ module.exports = function(eleventyConfig) {
   const fs = require('fs');
   const path = require('path');
   
-  // Custom filter to read ghazals JSON directly
-  eleventyConfig.addFilter("ghazals", function() {
-    const ghazalsDir = path.join(__dirname, 'src/content/ghazals');
-    const files = fs.readdirSync(ghazalsDir).filter(f => f.endsWith('.json'));
-    return files.map(f => {
-      const data = JSON.parse(fs.readFileSync(path.join(ghazalsDir, f), 'utf8'));
-      return { data: data };
-    });
+  // Add data to global data cascade
+  eleventyConfig.addGlobalData("ghazals", function() {
+    try {
+      const ghazalsDir = path.join(__dirname, 'src/content/ghazals');
+      const files = fs.readdirSync(ghazalsDir).filter(f => f.endsWith('.json'));
+      return files.map(f => {
+        const data = JSON.parse(fs.readFileSync(path.join(ghazalsDir, f), 'utf8'));
+        return { data: data };
+      });
+    } catch (e) {
+      console.error('Error loading ghazals:', e);
+      return [];
+    }
   });
   
-  // Custom filter to read nazms JSON directly
-  eleventyConfig.addFilter("nazms", function() {
-    const nazmsDir = path.join(__dirname, 'src/content/nazms');
-    const files = fs.readdirSync(nazmsDir).filter(f => f.endsWith('.json'));
-    return files.map(f => {
-      const data = JSON.parse(fs.readFileSync(path.join(nazmsDir, f), 'utf8'));
-      return { data: data };
-    });
+  // Add data to global data cascade
+  eleventyConfig.addGlobalData("nazms", function() {
+    try {
+      const nazmsDir = path.join(__dirname, 'src/content/nazms');
+      if (!fs.existsSync(nazmsDir)) return [];
+      const files = fs.readdirSync(nazmsDir).filter(f => f.endsWith('.json'));
+      return files.map(f => {
+        const data = JSON.parse(fs.readFileSync(path.join(nazmsDir, f), 'utf8'));
+        return { data: data };
+      });
+    } catch (e) {
+      console.error('Error loading nazms:', e);
+      return [];
+    }
   });
   
   // Urdu date filter
