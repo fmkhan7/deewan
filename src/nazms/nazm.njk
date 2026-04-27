@@ -1,6 +1,6 @@
 ---
 layout: layouts/base.njk
-permalink: nazms/{{ slug }}/
+permalink: nazms/{% if slug > 0 %}/{{ slug }}{% endif %}/
 ---
 
 <article class="nazm">
