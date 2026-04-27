@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or site.title }}</title>
   <meta name="description" content="{{ description or site.description }}">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jameel+Nori+Nastaliq:wght@400;700&display=swap" rel="stylesheet">
@@ -13,11 +13,11 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <h1 class="site-title"><a href="/">{{ site.title }}</a></h1>
+      <h1 class="site-title"><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
       <nav class="site-nav">
-        <a href="/">Home</a>
-        <a href="/ghazals/">غزلیں</a>
-        <a href="/nazms/">نظمیں</a>
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/ghazals/">غزلیں</a>
+        <a href="{{ site.baseurl }}/nazms/">نظمیں</a>
       </nav>
     </div>
   </header>

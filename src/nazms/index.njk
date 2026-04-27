@@ -12,7 +12,7 @@ title: نظیمیں - Nazms
   <ul class="poetry-list">
   {% for nazm in collections.nazms %}
     <li class="poetry-item">
-      <a href="/nazms/{{ nazm.data.slug }}/">
+      <a href="{{ site.baseurl }}/nazms/{{ nazm.data.slug }}/">
         <span class="title">{{ nazm.data.title }}</span>
       </a>
       {% if nazm.data.meter %}

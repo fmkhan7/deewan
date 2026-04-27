@@ -12,7 +12,7 @@ title: غزلیں - Ghazals
   <ul class="poetry-list">
   {% for ghazal in collections.ghazals %}
     <li class="poetry-item">
-      <a href="/ghazals/{{ ghazal.data.slug }}/">
+      <a href="{{ site.baseurl }}/ghazals/{{ ghazal.data.slug }}/">
         <span class="title">{{ ghazal.data.title }}</span>
       </a>
       {% if ghazal.data.meter %}
