@@ -1,18 +1,23 @@
 ---
 layout: layouts/base.njk
-permalink: nazms/{% if slug > 0 %}/{{ slug }}{% endif %}/
+eleventyExcludeFromCollections: true
+pagination:
+  data: collections.nazms
+  size: 1
+  alias: nazm
+permalink: nazms/{{ nazm.data.slug }}/
 ---
 
 <article class="nazm">
   <header class="poetry-header">
-    <h1>{{ title }}</h1>
-    {% if meter %}
-    <p class="meter">بحر: {{ meter }}</p>
+    <h1>{{ nazm.data.title }}</h1>
+    {% if nazm.data.meter %}
+    <p class="meter">بحر: {{ nazm.data.meter }}</p>
     {% endif %}
   </header>
 
   <div class="verses">
-  {% for verse in verses %}
+  {% for verse in nazm.data.verses %}
     <p class="verse">{{ verse }}</p>
   {% endfor %}
   </div>
