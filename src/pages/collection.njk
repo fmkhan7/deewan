@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: poetry_collections
+  size: 1
+  alias: coll
+permalink: /{{ coll.slug }}/
+---
+
+<div class="collection-page">
+  <header class="page-header">
+    <h1>{{ coll.title }}</h1>
+    <p class="author">{{ coll.author }}</p>
+    <p class="description">{{ coll.description }}</p>
+  </header>
+
+  <section class="poetry-types">
+    <div class="poetry-type-card">
+      <h2><a href="{{ site.baseurl }}/ghazals/">غزلیں</a></h2>
+      <p>اردو غزلوں کا مجموعہ</p>
+    </div>
+    <div class="poetry-type-card">
+      <h2><a href="{{ site.baseurl }}/nazms/">نظمیں</a></h2>
+      <p>اردو نظموں کا مجموعہ</p>
+    </div>
+  </section>
+</div>

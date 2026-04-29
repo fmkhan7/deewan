@@ -1,0 +1,22 @@
+module.exports = [
+  {
+    "slug": "deewan-e-ekta",
+    "title": "دیوان یکتا",
+    "titleEn": "Deewan-e-Ekta",
+    "author": "یکتا",
+    "authorEn": "Ekta",
+    "description": "Urdu Poetry Collection",
+    "language": "ur",
+    "default": true
+  },
+  {
+    "slug": "deewan-ghalib",
+    "title": "دیوان غالب",
+    "titleEn": "Deewan-e-Ghalib",
+    "author": "غالب",
+    "authorEn": "Ghalib",
+    "description": "Another Urdu Poetry Collection",
+    "language": "ur",
+    "default": false
+  }
+];

@@ -6,17 +6,15 @@ permalink: /
 <div class="home-page">
   <section class="hero">
     <h2>خوش آمدید</h2>
-    <p class="tagline">{{ site.description }}</p>
+    <p class="tagline">{{ collection.description }}</p>
   </section>
 
   <section class="collections">
+    {% for coll in poetry_collections %}
     <div class="collection-card">
-      <h3><a href="{{ site.baseurl }}/ghazals/">غزلیں</a></h3>
-      <p>اردو غزلوں کا مجموعہ</p>
+      <h3><a href="{{ site.baseurl }}/{{ coll.slug }}/">{{ coll.title }}</a></h3>
+      <p>{{ coll.author }}</p>
     </div>
-    <div class="collection-card">
-      <h3><a href="{{ site.baseurl }}/nazms/">نظمیں</a></h3>
-      <p>اردو نظموں کا مجموعہ</p>
-    </div>
+    {% endfor %}
   </section>
 </div>

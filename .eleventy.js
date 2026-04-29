@@ -8,6 +8,33 @@ module.exports = function(eleventyConfig) {
   const fs = require('fs');
   const path = require('path');
   
+  // Poetry collections data
+  const poetry_collections = [
+    {
+      slug: "deewan-e-ekta",
+      title: "دیوان یکتا",
+      titleEn: "Deewan-e-Ekta",
+      author: "یکتا",
+      authorEn: "Ekta",
+      description: "Urdu Poetry Collection",
+      language: "ur",
+      default: true
+    },
+    {
+      slug: "deewan-ghalib",
+      title: "دیوان غالب",
+      titleEn: "Deewan-e-Ghalib",
+      author: "غالب",
+      authorEn: "Ghalib",
+      description: "Another Urdu Poetry Collection",
+      language: "ur",
+      default: false
+    }
+  ];
+  
+  // Add collections to global data
+  eleventyConfig.addGlobalData("poetry_collections", poetry_collections);
+  
   // Add data to global data cascade
   eleventyConfig.addGlobalData("ghazals", function() {
     try {
