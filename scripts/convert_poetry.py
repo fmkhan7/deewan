@@ -33,29 +33,43 @@ def parse_ghazal(text: str) -> dict:
 
 
 def parse_multi_poem_file(input_path: str) -> list:
-    """Parse a file containing multiple poems separated by 'غزل' markers."""
+    """Parse a file containing multiple poems separated by 'غزل' markers.
+    
+    Handles variations:
+    - غزل (alone on line)
+    - غزل  (with trailing space)
+    - غزل وہ آج... (غزل + poem start on same line)
+    """
     
     with open(input_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # Split by "غزل" marker
-    poems = content.split('\nغزل\n')
+    # Split by "غزل" marker - handle various patterns
+    # Pattern 1: غزل at start of line (with optional trailing space)
+    # Pattern 2: غزل followed by text on same line
     
-    # If content starts with "غزل", first element will be empty
-    # Re-split properly
-    if content.startswith('غزل\n'):
-        content = content[4:]  # Remove leading "غزل\n"
-        poems = content.split('\nغزل\n')
+    # First, normalize: add newline after pure "غزل" lines
+    content = re.sub(r'^غزل\s*$', '\nغزل\n', content, flags=re.MULTILINE)
+    
+    # Now split by the marker
+    parts = content.split('\nغزل\n')
     
     result = []
-    for i, poem_text in enumerate(poems):
+    for i, poem_text in enumerate(parts):
         poem_text = poem_text.strip()
         if not poem_text:
             continue
         
-        # Get first line as title (first few words)
+        # Check if poem starts with "غزل وہ آج..." or similar (غزل + text on same line)
+        if poem_text.startswith('غزل '):
+            poem_text = poem_text[4:]  # Remove "غزل " prefix
+        
         lines = poem_text.split('\n')
+        
+        # Skip if first line is empty or too short
         first_line = lines[0].strip() if lines else ""
+        if len(first_line) < 3:
+            continue
         
         # Create title from first few words (up to 4 words)
         words = first_line.split()
@@ -63,14 +77,14 @@ def parse_multi_poem_file(input_path: str) -> list:
         if len(words) > 4:
             title += '...'
         
-        # Parse couplets
+        # Parse couplets (pairs of lines)
         couplets = []
-        lines = [l.strip() for l in poem_text.split('\n') if l.strip()]
+        valid_lines = [l.strip() for l in lines if l.strip() and len(l.strip()) > 2]
         
-        for j in range(0, len(lines) - 1, 2):
+        for j in range(0, len(valid_lines) - 1, 2):
             couplet = {
-                "line1": lines[j],
-                "line2": lines[j + 1] if j + 1 < len(lines) else ""
+                "line1": valid_lines[j],
+                "line2": valid_lines[j + 1] if j + 1 < len(valid_lines) else ""
             }
             couplets.append(couplet)
         
