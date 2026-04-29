@@ -32,6 +32,83 @@ def parse_ghazal(text: str) -> dict:
     return couplets
 
 
+def parse_multi_poem_file(input_path: str) -> list:
+    """Parse a file containing multiple poems separated by 'غزل' markers."""
+    
+    with open(input_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Split by "غزل" marker
+    poems = content.split('\nغزل\n')
+    
+    # If content starts with "غزل", first element will be empty
+    # Re-split properly
+    if content.startswith('غزل\n'):
+        content = content[4:]  # Remove leading "غزل\n"
+        poems = content.split('\nغزل\n')
+    
+    result = []
+    for i, poem_text in enumerate(poems):
+        poem_text = poem_text.strip()
+        if not poem_text:
+            continue
+        
+        # Get first line as title (first few words)
+        lines = poem_text.split('\n')
+        first_line = lines[0].strip() if lines else ""
+        
+        # Create title from first few words (up to 4 words)
+        words = first_line.split()
+        title = ' '.join(words[:4])
+        if len(words) > 4:
+            title += '...'
+        
+        # Parse couplets
+        couplets = []
+        lines = [l.strip() for l in poem_text.split('\n') if l.strip()]
+        
+        for j in range(0, len(lines) - 1, 2):
+            couplet = {
+                "line1": lines[j],
+                "line2": lines[j + 1] if j + 1 < len(lines) else ""
+            }
+            couplets.append(couplet)
+        
+        if couplets:
+            result.append({
+                "title": title,
+                "slug": create_slug(title),
+                "meter": "آزاد",
+                "couplets": couplets
+            })
+    
+    return result
+
+
+def convert_multi_file(input_path: str, output_dir: str) -> int:
+    """Convert a file with multiple poems into separate JSON files."""
+    
+    poems = parse_multi_poem_file(input_path)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    count = 0
+    for i, poem in enumerate(poems):
+        # Use index if slug might duplicate
+        if i > 0:
+            poem['slug'] = f"{poem['slug']}-{i+1}"
+        
+        output_file = output_path / f"{poem['slug']}.json"
+        
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(poem, f, ensure_ascii=False, indent=2)
+        
+        print(f"✓ {i+1}. {poem['title']} -> {output_file.name} ({len(poem['couplets'])} couplets)")
+        count += 1
+    
+    return count
+
+
 def parse_nazm(text: str) -> dict:
     """Parse nazm (free verse) text into verses."""
     verses = []
@@ -145,6 +222,8 @@ Examples:
     parser.add_argument('output', help='Output file or directory')
     parser.add_argument('--type', choices=['ghazal', 'nazm'], default='ghazal',
                        help='Poetry type (default: ghazal)')
+    parser.add_argument('--multi', action='store_true',
+                       help='Input file contains multiple poems separated by "غزل" markers')
     parser.add_argument('--title', help='Title for single file conversion')
     parser.add_argument('--meter', help='Meter/بحر for the poem')
     
@@ -153,7 +232,12 @@ Examples:
     # Determine if input is file or directory
     input_path = Path(args.input)
     
-    if input_path.is_file():
+    if args.multi and input_path.is_file():
+        # Multi-poem file conversion
+        count = convert_multi_file(args.input, args.output)
+        print(f"\n✓ Converted {count} poems to {args.output}")
+        
+    elif input_path.is_file():
         # Single file conversion
         poem = convert_file(args.input, args.output, args.type, args.title, args.meter)
         print(f"✓ Converted: {poem['title']}")
