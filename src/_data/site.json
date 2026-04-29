@@ -1,5 +1,9 @@
 {
-  "poetryCollections": "poetry-collections.json",
-  "activeCollection": "deewan-e-ekta",
+  "title": "دیوان یکتا",
+  "titleEn": "Deewan-e-Ekta",
+  "description": "Urdu Poetry Collection - غزل اور نظم کا مجموعہ",
+  "language": "ur",
+  "author": "یکتا",
+  "authorEn": "Ekta",
   "baseurl": "/deewan"
 }
