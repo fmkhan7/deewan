@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="{{ collection.language or 'ur' }}" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or site.title }}</title>
-  <meta name="description" content="{{ description or site.description }}">
+  <title>{{ title or collection.title }}</title>
+  <meta name="description" content="{{ description or collection.description }}">
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +13,18 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <h1 class="site-title"><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
+      <h1 class="site-title"><a href="{{ site.baseurl }}/">{{ collection.title }}</a></h1>
       <nav class="site-nav">
         <a href="{{ site.baseurl }}/">Home</a>
         <a href="{{ site.baseurl }}/ghazals/">غزلیں</a>
         <a href="{{ site.baseurl }}/nazms/">نظمیں</a>
+        {% if poetryCollections.length > 1 %}
+        <select class="collection-switcher" onchange="window.location.href=this.value">
+          {% for coll in poetryCollections %}
+          <option value="{{ site.baseurl }}/{{ coll.slug }}/" {% if coll.slug == collection.slug %}selected{% endif %}>{{ coll.titleEn }}</option>
+          {% endfor %}
+        </select>
+        {% endif %}
       </nav>
     </div>
   </header>
@@ -28,7 +35,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; {{ site.author }} — دیوان یکتا</p>
+      <p>&copy; {{ collection.author }} — {{ collection.title }}</p>
     </div>
   </footer>
 </body>
