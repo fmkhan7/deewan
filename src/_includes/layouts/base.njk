@@ -11,16 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Jameel+Nori+Nastaliq:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title"><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
-      <nav class="site-nav">
-        <a href="{{ site.baseurl }}/">Home</a>
-        <a href="{{ site.baseurl }}/ghazals/">غزلیں</a>
-        <a href="{{ site.baseurl }}/nazms/">نظمیں</a>
-      </nav>
-    </div>
-  </header>
+  {% include "components/header.njk" %}
 
   <main class="site-main">
     {{ content | safe }}
